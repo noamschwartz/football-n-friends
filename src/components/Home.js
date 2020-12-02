@@ -14,6 +14,7 @@ import {
 import { NavLink } from "react-router-dom";
 
 import { getNextFixture } from "../DAL/api/api-football";
+import ContestTable from "./ContestTable";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 import UserAccount from "./UserAccount";
@@ -31,7 +32,7 @@ const Home = (props) => {
     {/* ###########TEMP######### */}
       <Row>
         <Col>
-          <UserAccount/>
+          <ContestTable/>
         </Col>
       </Row>
       {/* ########################## */}
