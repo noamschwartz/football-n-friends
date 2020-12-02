@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeading, faChartBar } from "@fortawesome/free-solid-svg-icons";
 
-
 import {
   Container,
   Nav,
@@ -23,7 +22,7 @@ import Field from "../validators/Validator";
 import { addNewAnalysis } from "../DAL/api/api-football";
 
 const NewAnalysis = () => {
-    const { fixtureId } = useParams();
+  const { fixtureId } = useParams();
   const [fields, setFields] = useState({
     pick: new Field({ name: "pick", value: "", required: true }),
 
@@ -59,7 +58,6 @@ const NewAnalysis = () => {
         return result;
       }, {});
       addNewAnalysis(fixtureId, 117, analysis);
-
     }
   };
   const setValue = (e) => {

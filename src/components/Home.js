@@ -11,10 +11,12 @@ import {
   Card,
   ListGroup,
 } from "react-bootstrap";
-import {NavLink} from 'react-router-dom';
-
+import { NavLink } from "react-router-dom";
 
 import { getNextFixture } from "../DAL/api/api-football";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
+import UserAccount from "./UserAccount";
 
 const Home = (props) => {
   const [fixtures, setFixtures] = useState([]);
@@ -26,6 +28,13 @@ const Home = (props) => {
 
   return (
     <>
+    {/* ###########TEMP######### */}
+      <Row>
+        <Col>
+          <UserAccount/>
+        </Col>
+      </Row>
+      {/* ########################## */}
       <Row className="mt-5 mb-5">
         <Col md="2">
           <Button
@@ -124,10 +133,14 @@ const Home = (props) => {
                   </ListGroup>
                 </Card.Text>
 
-                <NavLink className="nav-link" to={`/fixture-analysis/${fixture.fixture_id}`}>
-                <Button variant="primary" block>Analyze</Button>
-            </NavLink>
-                
+                <NavLink
+                  className="nav-link"
+                  to={`/fixture-analysis/${fixture.fixture_id}`}
+                >
+                  <Button variant="primary" block>
+                    Analyze
+                  </Button>
+                </NavLink>
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">Last updated 3 mins ago</small>

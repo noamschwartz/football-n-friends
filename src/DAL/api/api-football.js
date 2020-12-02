@@ -50,20 +50,22 @@ const addNewAnalysis = (fixtureId, userId, analysis) => {
   const analysisArr = getItem(`fixtureAnalysis${fixtureId}`);
   if (!analysisArr) {
     try {
-      addItem(`fixtureAnalysis${fixtureId}`, [{
-        ...analysis, 
-        userId, 
-        fixtureId
-      }]);
+      addItem(`fixtureAnalysis${fixtureId}`, [
+        {
+          ...analysis,
+          userId,
+          fixtureId,
+        },
+      ]);
       return true;
     } catch (e) {
       console.error("addNewAnalysis error", e);
     }
-  }else{
+  } else {
     analysisArr.push({
-      ...analysis, 
-      userId, 
-      fixtureId
+      ...analysis,
+      userId,
+      fixtureId,
     });
     addItem(`fixtureAnalysis${fixtureId}`, analysisArr);
   }
@@ -71,8 +73,27 @@ const addNewAnalysis = (fixtureId, userId, analysis) => {
 
 const getUsersFixtureAnalysis = (fixtureId) => {
   return getItem(`fixtureAnalysis${fixtureId}`);
-}
+};
 
+const addNewUser = (userInfo) => {
+  const previousUsers = getItem("users");
+  if (!previousUsers) {
+    try {
+      addItem("users", [{ userInfo }]);
+      return true;
+    } catch (e) {
+      console.error("addNewUser error", e);
+    }
+  } else {
+    previousUsers.push(userInfo);
+  }
+  addItem('users', previousUsers);
+};
 
-
-export { getNextFixture, getFixtureStats, addNewAnalysis,getUsersFixtureAnalysis };
+export {
+  getNextFixture,
+  getFixtureStats,
+  addNewAnalysis,
+  getUsersFixtureAnalysis,
+  addNewUser
+};
