@@ -17,6 +17,9 @@ const FixtureStats = (props) => {
     getStats();
   }, []);
 
+
+
+
   const navigateToAnalysis = () => {
       history.push(`/new-analysis/${props.fixtureId}`);
   };

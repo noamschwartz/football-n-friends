@@ -9,6 +9,7 @@ import FixtureAnalysis from "./components/FixtureAnalysis";
 import NewAnalysis from './components/NewAnalysis';
 import Navbar from "./components/Navigatorbar";
 import { Container } from "react-bootstrap";
+import Prediction from "./components/Prediction";
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
           <Route path="/fixture-analysis/:fixtureId">
             <FixtureAnalysis />
           </Route>
-          {/* <Route path="/new-analysis/:fixtureId">
+          <Route path="/new-analysis/:fixtureId">
             <NewAnalysis />
-          </Route> */}
+          </Route>
+          
         </main>
       </Container>
     </BrowserRouter>

@@ -46,6 +46,33 @@ const getFixtureStats = async (fixtureId) => {
   return result;
 };
 
+const addNewAnalysis = (fixtureId, userId, analysis) => {
+  const analysisArr = getItem(`fixtureAnalysis${fixtureId}`);
+  if (!analysisArr) {
+    try {
+      addItem(`fixtureAnalysis${fixtureId}`, [{
+        ...analysis, 
+        userId, 
+        fixtureId
+      }]);
+      return true;
+    } catch (e) {
+      console.error("addNewAnalysis error", e);
+    }
+  }else{
+    analysisArr.push({
+      ...analysis, 
+      userId, 
+      fixtureId
+    });
+    addItem(`fixtureAnalysis${fixtureId}`, analysisArr);
+  }
+};
+
+const getUsersFixtureAnalysis = (fixtureId) => {
+  return getItem(`fixtureAnalysis${fixtureId}`);
+}
 
 
-export { getNextFixture, getFixtureStats };
+
+export { getNextFixture, getFixtureStats, addNewAnalysis,getUsersFixtureAnalysis };

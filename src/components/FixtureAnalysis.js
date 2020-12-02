@@ -2,9 +2,13 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
 
 import FixtureStats from "./FixtureStats";
+import Prediction from "./Prediction";
 
 const FixtureAnalysis = () => {
   const { fixtureId } = useParams();
+
+
+
   console.log(fixtureId);
   return (
     <Container fluid>
@@ -25,6 +29,9 @@ const FixtureAnalysis = () => {
             </Tab>
             <Tab eventKey="standings" title="Standings">
               Tal
+            </Tab>
+            <Tab eventKey="predictions" title="Predictions">
+              <Prediction fixtureId={fixtureId}/>
             </Tab>
           </Tabs>
         </Col>
