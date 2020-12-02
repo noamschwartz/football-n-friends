@@ -5,7 +5,7 @@ import { addItem, getItem } from "./localStorageAPI";
 const basicOptions = {
   params: { timezone: "Europe/London" },
   headers: {
-    "x-rapidapi-key": "",
+    "x-rapidapi-key": "dc11f843f2mshfd6c8fc3cbc3d35p1342e8jsn4835f270c82a",
     "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
   },
 };
@@ -28,40 +28,24 @@ const getNextFixture = async (leagueId, limit) => {
   return result;
 };
 
-export { getNextFixture };
-
-/*
-  {
-    fixture_id: 605176,
-    league_id: 2833,
-    league: {
-      name: "Primera Division",
-      country: "Spain",
-      logo: "https://media.api-sports.io/football/leagues/140.png",
-      flag: "https://media.api-sports.io/flags/es.svg",
-    },
-    event_date: "2020-12-04T20:00:00+00:00",
-    event_timestamp: 1607112000,
-    firstHalfStart: null,
-    secondHalfStart: null,
-    round: "Regular Season - 12",
-    status: "Not Started",
-    statusShort: "NS",
-    elapsed: 0,
-    venue: "San Mamés Barria",
-    referee: null,
-    homeTeam: {
-      team_id: 531,
-      team_name: "Athletic Club",
-      logo: "https://media.api-sports.io/football/teams/531.png",
-    },
-    awayTeam: {
-      team_id: 538,
-      team_name: "Celta Vigo",
-      logo: "https://media.api-sports.io/football/teams/538.png",
-    },
-    goalsHomeTeam: null,
-    goalsAwayTeam: null,
-    score: { halftime: null, fulltime: null, extratime: null, penalty: null },
+const getFixtureStats = async (fixtureId) => {
+  const result = getItem(`fixture${fixtureId}`);
+  if (!result) {
+    try {
+      const { data } = await axios.request({
+        ...basicOptions,
+        url: `predictions/${fixtureId}`,
+      });
+      addItem(`fixture${fixtureId}`, data.api.predictions[0]);
+      return data.api.predictions[0];
+    } catch (e) {
+      console.error("getFixtureStats error", e);
+    }
   }
-*/
+
+  return result;
+};
+
+
+
+export { getNextFixture, getFixtureStats };

@@ -11,6 +11,8 @@ import {
   Card,
   ListGroup,
 } from "react-bootstrap";
+import {NavLink} from 'react-router-dom';
+
 
 import { getNextFixture } from "../DAL/api/api-football";
 
@@ -23,28 +25,7 @@ const Home = (props) => {
   };
 
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          {" "}
-          <Navbar bg="primary" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-light">Search</Button>
-            </Form>
-          </Navbar>
-        </Col>
-      </Row>
+    <>
       <Row className="mt-5 mb-5">
         <Col md="2">
           <Button
@@ -142,7 +123,11 @@ const Home = (props) => {
                     <ListGroup.Item>{fixture.venue}</ListGroup.Item>
                   </ListGroup>
                 </Card.Text>
-                <Button variant="primary" block>Go somewhere</Button>
+
+                <NavLink className="nav-link" to={`/fixture-analysis/${fixture.fixture_id}`}>
+                <Button variant="primary" block>Analyze</Button>
+            </NavLink>
+                
               </Card.Body>
               <Card.Footer>
                 <small className="text-muted">Last updated 3 mins ago</small>
@@ -151,7 +136,7 @@ const Home = (props) => {
           </Col>
         ))}
       </Row>
-    </Container>
+    </>
   );
 };
 
