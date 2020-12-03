@@ -5,8 +5,8 @@ import { addItem, getItem } from "./localStorageAPI";
 const basicOptions = {
   params: { timezone: "Europe/London" },
   headers: {
-    "x-rapidapi-key": "dc11f843f2mshfd6c8fc3cbc3d35p1342e8jsn4835f270c82a",
-    "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+    "x-rapidapi-key": process.env.REACT_APP_FOOTBALL_API,
+    "x-rapidapi-host": process.env.REACT_APP_FOOTBALL_API_HOST,
   },
 };
 
@@ -72,7 +72,7 @@ const addNewAnalysis = (fixtureId, userId, analysis) => {
 };
 
 const getUsersFixtureAnalysis = (fixtureId) => {
-  return getItem(`fixtureAnalysis${fixtureId}`);
+  return getItem(`fixtureAnalysis${fixtureId}`) || [];
 };
 
 const addNewUser = (userInfo) => {

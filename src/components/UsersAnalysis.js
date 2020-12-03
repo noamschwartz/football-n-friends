@@ -16,7 +16,6 @@ const UsersAnalysis = () => {
     const getFixtureAnalysis = () => {
       const newAnalysis = getUsersFixtureAnalysis(fixtureId);
       setUsersFixtureAnalysis(newAnalysis);
-      console.log(usersFixtureAnalysis);
     };
     getFixtureAnalysis();
   }, []);
