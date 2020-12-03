@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+// import { BrowseRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+
+import logo from "./logo.svg";
+import "./App.css";
+import Home from "./components/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
+import FixtureAnalysis from "./components/FixtureAnalysis";
+import NewAnalysis from './components/NewAnalysis';
+import Navbar from "./components/Navigatorbar";
+import { Container } from "react-bootstrap";
+import Prediction from "./components/Prediction";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Container fluid>
+        <header>
+          <Navbar />
+        </header>
+        <main>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/fixture-analysis/:fixtureId">
+            <FixtureAnalysis />
+          </Route>
+          <Route path="/new-analysis/:fixtureId">
+            <NewAnalysis />
+          </Route>
+          
+        </main>
+      </Container>
+    </BrowserRouter>
   );
 }
-
 export default App;
