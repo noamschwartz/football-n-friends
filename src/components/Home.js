@@ -29,13 +29,7 @@ const Home = (props) => {
 
   return (
     <>
-    {/* ###########TEMP######### */}
-      <Row>
-        <Col>
-          <ContestTable/>
-        </Col>
-      </Row>
-      {/* ########################## */}
+
       <Row className="mt-5 mb-5">
         <Col md="2">
           <Button

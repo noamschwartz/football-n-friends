@@ -3,13 +3,11 @@ import { Container, Row, Col, Tabs, Tab } from "react-bootstrap";
 
 import FixtureStats from "./FixtureStats";
 import Prediction from "./Prediction";
+import TeamStats from "./TeamStats";
 
 const FixtureAnalysis = () => {
   const { fixtureId } = useParams();
 
-
-
-  console.log(fixtureId);
   return (
     <Container fluid>
       <Row>
@@ -25,7 +23,7 @@ const FixtureAnalysis = () => {
               <FixtureStats fixtureId={fixtureId} />
             </Tab>
             <Tab eventKey="team-stats" title="Team Stats">
-              Shahar
+              <TeamStats fixtureId={fixtureId}/>
             </Tab>
             <Tab eventKey="standings" title="Standings">
               Tal
