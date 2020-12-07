@@ -46,16 +46,16 @@ const FixtureStats = (props) => {
                   data={[
                     {
                       name: stats.teams.home.team_name,
-                      symbol: { fill: "lightblue" },
+                      symbol: { fill: "navy" },
                     },
                     {
                       name: stats.teams.away.team_name,
-                      symbol: { fill: "lightgreen" },
+                      symbol: { fill: "tomato" },
                     },
                   ]}
                 />
                 <VictoryPie
-                  colorScale={["lightblue", "lightgreen"]}
+                  colorScale={["navy", "tomato"]}
                   data={[
                     { x: "home", y: parseInt(stats.comparison[field].home) },
                     { x: "away", y: parseInt(stats.comparison[field].away) },

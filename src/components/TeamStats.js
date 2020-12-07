@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import * as V from "victory";
 import { VictoryPie, VictoryChart, VictoryLegend } from "victory";
 
 import { getFixtureStats } from "../DAL/api/api-football";
@@ -44,20 +43,20 @@ const TeamStats = (props) => {
                   data={[
                     {
                       name: stats.teams.home.team_name,
-                      symbol: { fill: "lightblue" },
+                      symbol: { fill: "navy" },
                     },
                     {
                       name: stats.teams.away.team_name,
-                      symbol: { fill: "lightgreen" },
+                      symbol: { fill: "tomato" },
                     },
                   ]}
                 />
                 <VictoryPie
-                  colorScale={["lightblue", "lightgreen", "tomato"]}
+                  colorScale={["navy", "tomato"]}
                   data={[
                     { x: "home", y: parseInt(stats.teams.home.all_last_matches.matchs[field].home) },
                     { x: "away", y: parseInt(stats.teams.home.all_last_matches.matchs[field].away) },
-                    { x: "total", y: parseInt(stats.teams.home.all_last_matches.matchs[field].total) },
+                    // { x: "total", y: parseInt(stats.teams.home.all_last_matches.matchs[field].total) },
                   ]}
                 />
               </VictoryChart>

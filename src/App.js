@@ -10,6 +10,10 @@ import NewAnalysis from './components/NewAnalysis';
 import Navbar from "./components/Navigatorbar";
 import { Container } from "react-bootstrap";
 import Prediction from "./components/Prediction";
+import ContestTable from "./components/ContestTable";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
+import MyProfile from "./components/MyProfile";
 
 function App() {
   return (
@@ -22,12 +26,25 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/fixture-analysis/:fixtureId">
+          <Route path="/fixture-analysis/:leagueId/:fixtureId">
             <FixtureAnalysis />
           </Route>
           <Route path="/new-analysis/:fixtureId">
             <NewAnalysis />
           </Route>
+          <Route path="/contests">
+            <ContestTable />
+          </Route>
+          <Route path="/signup">
+            <Signup/>
+          </Route>
+          <Route path="/login">
+            <Login/>
+          </Route>
+          <Route path="/my-profile">
+            <MyProfile/>
+          </Route>
+          
           
         </main>
       </Container>

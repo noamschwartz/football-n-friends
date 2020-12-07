@@ -46,6 +46,24 @@ const getFixtureStats = async (fixtureId) => {
   return result;
 };
 
+const getFixtureInfo = async (fixtureId) => {
+  const result = getItem(`fixtureInfo${fixtureId}`);
+  if (!result) {
+    try {
+      const { data } = await axios.request({
+        ...basicOptions,
+        url: `fixtures/id/${fixtureId}`,
+      });
+      addItem(`fixtureInfo${fixtureId}`, data.api.fixtures[0]);
+      return data.api.fixtures[0];
+    } catch (e) {
+      console.error("getFixtureStats error", e);
+    }
+  }
+
+  return result;
+};
+
 const addNewAnalysis = (fixtureId, userId, analysis) => {
   const analysisArr = getItem(`fixtureAnalysis${fixtureId}`);
   if (!analysisArr) {
@@ -90,10 +108,31 @@ const addNewUser = (userInfo) => {
   addItem('users', previousUsers);
 };
 
+const getStandings = async (leagueId) => {
+  const result = getItem(`standings${leagueId}`);
+  if (!result) {
+    try {
+      const { data } = await axios.request({
+        ...basicOptions,
+        url: `leagueTable/${leagueId}`,
+      });
+      addItem(`standings${leagueId}`, data.api.standings[0]);
+      return data.api.standings[0];
+    } catch (e) {
+      console.error("getStandings error", e);
+    }
+  }
+
+  return result;
+};
+
+
 export {
   getNextFixture,
   getFixtureStats,
+  getFixtureInfo,
   addNewAnalysis,
   getUsersFixtureAnalysis,
-  addNewUser
+  addNewUser,
+  getStandings
 };
