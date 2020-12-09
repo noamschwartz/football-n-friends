@@ -130,7 +130,7 @@ const Home = (props) => {
 
                 <NavLink
                   className="nav-link"
-                  to={`/fixture-analysis/${fixture.league_id}/${fixture.fixture_id}`}
+                  to={`/fixture-analysis/${fixture.league_id}/${fixture.fixture_id}/fixture-stats`}
                 >
                   <Button variant="primary" block>
                     Analyze

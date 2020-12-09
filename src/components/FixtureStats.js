@@ -1,35 +1,16 @@
-import { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import * as V from "victory";
+import { Container, Row, Col } from "react-bootstrap";
+
 import { VictoryPie, VictoryChart, VictoryLegend } from "victory";
 
-import { getFixtureStats } from "../DAL/api/api-football";
-
 const FixtureStats = (props) => {
-  const history = useHistory();
-  const [stats, setStats] = useState(null);
-  useEffect(() => {
-    const getStats = async () => {
-      const newStats = await getFixtureStats(props.fixtureId);
-      setStats(newStats);
-    };
-    getStats();
-  }, []);
 
-
-
-
-  const navigateToAnalysis = () => {
-      history.push(`/new-analysis/${props.fixtureId}`);
-  };
 
   return (
     <Container fluid>
-      <Button onClick={navigateToAnalysis}>Create New Analysis</Button>
+      
       <Row>
-        {stats &&
-          Object.keys(stats.comparison).map((field) => (
+        {props.fixtureInfo &&
+          Object.keys(props.fixtureInfo.comparison).map((field) => (
             <Col md="4">
               <VictoryChart>
                 <VictoryLegend
@@ -45,11 +26,11 @@ const FixtureStats = (props) => {
                   //   }}
                   data={[
                     {
-                      name: stats.teams.home.team_name,
+                      name: props.fixtureInfo.teams.home.team_name,
                       symbol: { fill: "navy" },
                     },
                     {
-                      name: stats.teams.away.team_name,
+                      name: props.fixtureInfo.teams.away.team_name,
                       symbol: { fill: "tomato" },
                     },
                   ]}
@@ -57,8 +38,8 @@ const FixtureStats = (props) => {
                 <VictoryPie
                   colorScale={["navy", "tomato"]}
                   data={[
-                    { x: "home", y: parseInt(stats.comparison[field].home) },
-                    { x: "away", y: parseInt(stats.comparison[field].away) },
+                    { x: "home", y: parseInt(props.fixtureInfo.comparison[field].home) },
+                    { x: "away", y: parseInt(props.fixtureInfo.comparison[field].away) },
                   ]}
                 />
               </VictoryChart>

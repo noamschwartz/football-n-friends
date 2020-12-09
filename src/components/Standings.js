@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Table, Image, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { Table, Image } from "react-bootstrap";
+
 
 import { getStandings } from "../DAL/api/api-football";
 
 const Standings = (props) => {
-  const history = useHistory();
+
   const [standings, setStandings] = useState([]);
   useEffect(() => {
     const getStats = async () => {
@@ -15,13 +15,10 @@ const Standings = (props) => {
     getStats();
   }, []);
 
-  const navigateToAnalysis = () => {
-    history.push(`/new-analysis/${props.fixtureId}`);
-  };
+
 
   return (
     <>
-      <Button onClick={navigateToAnalysis}>Create New Analysis</Button>
       <Table striped bordered hover>
         <thead>
           <tr>

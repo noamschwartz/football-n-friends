@@ -1,5 +1,7 @@
+import UserAccount from "./UserAccount";
+
 const MyProfile = () => {
-    return ( "my-profile" );
+    return ( <UserAccount/> );
 }
  
 export default MyProfile;

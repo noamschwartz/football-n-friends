@@ -26,7 +26,7 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/fixture-analysis/:leagueId/:fixtureId">
+          <Route path="/fixture-analysis/:leagueId/:fixtureId/:section">
             <FixtureAnalysis />
           </Route>
           <Route path="/new-analysis/:fixtureId">

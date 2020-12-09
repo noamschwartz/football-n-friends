@@ -1,5 +1,7 @@
+import SignUpForm from "./SignUpForm";
+
 const Signup = () => {
-    return ( "signup" );
+    return (<SignUpForm/> );
 }
  
 export default Signup;

@@ -1,30 +1,17 @@
-import { Button, ListGroup, Table } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { Table } from "react-bootstrap";
+
 
 import UsersAnalysis from "./UsersAnalysis";
-import { getFixtureStats } from "../DAL/api/api-football";
-import { useEffect, useState } from "react";
-import { VictoryBoxPlot, VictoryPie } from "victory";
+import {  VictoryPie } from "victory";
+
 const Prediction = (props) => {
-  const history = useHistory();
 
-  const [prediction, setStats] = useState(null);
-  useEffect(() => {
-    const getStats = async () => {
-      const newStats = await getFixtureStats(props.fixtureId);
-      setStats(newStats);
-    };
-    getStats();
-  }, []);
 
-  const navigateToAnalysis = () => {
-    history.push(`/new-analysis/${props.fixtureId}`);
-  };
 
   return (
     <>
-      <Button onClick={navigateToAnalysis}>Create New Analysis</Button>
-      {prediction && (
+
+      {props.fixtureInfo && (
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -37,15 +24,15 @@ const Prediction = (props) => {
           <tbody>
             <tr>
 
-              <td><h2>{prediction.advice}</h2></td>
-              <td><h2>{prediction.under_over}</h2></td>
+              <td><h2>{props.fixtureInfo.advice}</h2></td>
+              <td><h2>{props.fixtureInfo.under_over}</h2></td>
               <td>
                 <VictoryPie
                   colorScale={["navy", "tomato", "green"]}
                   data={[
-                    { x: "home", y: parseInt(prediction.winning_percent.home)},
-                    { x: "draw", y: parseInt(prediction.winning_percent.draws)},
-                    { x: "away", y: parseInt(prediction.winning_percent.away)},
+                    { x: "home", y: parseInt(props.fixtureInfo.winning_percent.home)},
+                    { x: "draw", y: parseInt(props.fixtureInfo.winning_percent.draws)},
+                    { x: "away", y: parseInt(props.fixtureInfo.winning_percent.away)},
                   ]}
                 />
               </td>
