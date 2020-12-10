@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import { Container, Row, Col, Alert, Button, Form } from "react-bootstrap";
 import Field from "../validators/Validator";
-import { addNewUser } from "../DAL/api/api-football";
+import { login } from "../DAL/api/api-football";
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const [fields, setFields] = useState({
@@ -20,7 +21,10 @@ const LoginForm = () => {
     }),
   });
 
-  const submit = (e) => {
+  const [forbidden, setForbidden] = useState("");
+  const history = useHistory();
+
+  const submit = async (e) => {
     e.preventDefault();
     let isValid = true;
     for (let field in { ...fields }) {
@@ -28,11 +32,16 @@ const LoginForm = () => {
     }
 
     if (isValid) {
-      const info = Object.keys(fields).reduce((result, prop) => {
+      const credentials = Object.keys(fields).reduce((result, prop) => {
         result[prop] = fields[prop].value;
         return result;
       }, {});
-      //   addNewUser(info);
+      const result = await login(credentials.email, credentials.password);
+      if (!result) {
+        setForbidden("Incorrect email or password");
+      } else {
+        history.push("/");
+      }
     }
   };
   const setValue = (e) => {
@@ -61,7 +70,7 @@ const LoginForm = () => {
             <Row>
               <Col>
                 {" "}
-                <Form.Group controlId="nameFeedback">
+                <Form.Group>
                   <Form.Label>Email</Form.Label>
 
                   <Form.Control
@@ -92,7 +101,7 @@ const LoginForm = () => {
             <Row>
               <Col>
                 {" "}
-                <Form.Group controlId="nameFeedback">
+                <Form.Group>
                   <Form.Label>Password</Form.Label>
 
                   <Form.Control
@@ -109,14 +118,25 @@ const LoginForm = () => {
                   {fields.password.errors.map((error) => (
                     <div
                       key={error}
-                      id="nameFeedback"
+                      id="passwordFeedback"
                       className="invalid-feedback"
-                      aria-describedby="nameFeedback"
+                      aria-describedby="passwordFeedback"
                       style={{ display: "block" }}
                     >
                       {error}
                     </div>
                   ))}
+                  {
+                    <div
+                      key="unauthorized"
+                      id="passwordFeedback"
+                      className="invalid-feedback"
+                      aria-describedby="passwordFeedback"
+                      style={{ display: "block" }}
+                    >
+                      {forbidden}
+                    </div>
+                  }
                 </Form.Group>{" "}
               </Col>
             </Row>
