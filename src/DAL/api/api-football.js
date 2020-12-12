@@ -72,29 +72,28 @@ const getStandings = async (leagueId) => {
 // return result;
 // };
 
-const addNewAnalysis = (fixtureId, userId, analysis) => {
-  const analysisArr = getItem(`fixtureAnalysis${fixtureId}`);
-  if (!analysisArr) {
-    try {
-      addItem(`fixtureAnalysis${fixtureId}`, [
-        {
-          ...analysis,
-          userId,
-          fixtureId,
-        },
-      ]);
-      return true;
-    } catch (e) {
-      console.error("addNewAnalysis error", e);
-    }
-  } else {
-    analysisArr.push({
-      ...analysis,
-      userId,
-      fixtureId,
+const addNewAnalysis = async (analysis) => {
+  //const analysisArr = getItem(`fixtureAnalysis${fixtureId}`);
+  // if (!analysisArr) {
+
+  try {
+    const response = await axios.post(`new-analysis`, {
+      analysis: analysis,
     });
-    addItem(`fixtureAnalysis${fixtureId}`, analysisArr);
+    return response;
+  } catch (e) {
+    console.error("addNewAnalysis error", e);
+    throw e;
   }
+  // }
+  //  else {
+  //   analysisArr.push({
+  //     ...analysis,
+  //     userId,
+  //     fixtureId,
+  //   });
+  //   addItem(`fixtureAnalysis${fixtureId}`, analysisArr);
+  // }
 };
 
 const getUsersFixtureAnalysis = (fixtureId) => {
@@ -128,13 +127,23 @@ const login = async (email, password) => {
   } catch (e) {
     console.error("getNextFixture error", e);
   }
-
-  //get response (true (user details)/false)
-  //if false -> return false
-  //if true -> return true
-
-  //cookie?
 };
+
+const logout = async () => {
+  //send credentials
+  try {
+    const data = await axios.post(`users/logout`);
+    console.log(data);
+    return data;
+  } catch (e) {
+    console.error("getNextFixture error", e);
+  }
+};
+//get response (true (user details)/false)
+//if false -> return false
+//if true -> return true
+
+//cookie?
 
 export {
   getNextFixture,
@@ -145,4 +154,5 @@ export {
   getStandings,
   addNewUser,
   login,
+  logout,
 };

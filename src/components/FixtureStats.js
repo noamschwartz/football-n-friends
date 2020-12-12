@@ -19,11 +19,6 @@ const FixtureStats = (props) => {
                   title={field}
                   centerTitle
                   orientation="horizontal"
-                  //   gutter={20}
-                  //   style={{
-                  //     border: { stroke: "black" },
-                  //     title: { fontSize: 20 },
-                  //   }}
                   data={[
                     {
                       name: props.fixtureInfo.teams.home.team_name,

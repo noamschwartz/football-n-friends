@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import SiteContext from "../DAL/api/context/site-context";
 
 import { Container, Row, Col, Alert, Button, Form } from "react-bootstrap";
 import Field from "../validators/Validator";
 import { login } from "../DAL/api/api-football";
 import { useHistory } from "react-router-dom";
+import { getUser } from "../DAL/api/cookieStorage";
 
 const LoginForm = () => {
   const [fields, setFields] = useState({
@@ -23,7 +25,7 @@ const LoginForm = () => {
 
   const [forbidden, setForbidden] = useState("");
   const history = useHistory();
-
+  const siteContext = useContext(SiteContext);
   const submit = async (e) => {
     e.preventDefault();
     let isValid = true;
@@ -40,6 +42,8 @@ const LoginForm = () => {
       if (!result) {
         setForbidden("Incorrect email or password");
       } else {
+        const user = getUser();
+        siteContext.setUser(user);
         history.push("/");
       }
     }
@@ -151,4 +155,5 @@ const LoginForm = () => {
   );
 };
 
+LoginForm.contextType = SiteContext;
 export default LoginForm;

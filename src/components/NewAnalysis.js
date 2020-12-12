@@ -20,6 +20,7 @@ import {
 import Field from "../validators/Validator";
 
 import { addNewAnalysis } from "../DAL/api/api-football";
+import { getUser } from "../DAL/api/cookieStorage";
 
 const NewAnalysis = () => {
   const { fixtureId } = useParams();
@@ -57,7 +58,8 @@ const NewAnalysis = () => {
         result[prop] = fields[prop].value;
         return result;
       }, {});
-      addNewAnalysis(fixtureId, 117, analysis);
+
+        addNewAnalysis({fixtureId:fixtureId, ...analysis});
     }
   };
   const setValue = (e) => {
@@ -107,7 +109,7 @@ const NewAnalysis = () => {
                 <Row>
                   <Col>
                     {" "}
-                    <Form.Group controlId="nameFeedback">
+                    <Form.Group >
                       <Form.Label>Title</Form.Label>
                       <FontAwesomeIcon icon={faHeading} size="1x" />
                       <Form.Control
@@ -207,7 +209,7 @@ const NewAnalysis = () => {
 
                 <Row>
                   <Col>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Group >
                       <Form.Label>Analysis</Form.Label>
 
                       <Form.Control

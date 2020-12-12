@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Container, Row, Col, Alert, Button, Form } from "react-bootstrap";
 import Field from "../validators/Validator";
-import { addNewUser } from "../DAL/api/api-football";
+
 
 const UserAccount = () => {
   const [fields, setFields] = useState({

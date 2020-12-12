@@ -2,11 +2,6 @@ import { useState, useEffect } from "react";
 import {
   Col,
   Row,
-  Container,
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
   Button,
   Card,
   ListGroup,
@@ -14,10 +9,8 @@ import {
 import { NavLink } from "react-router-dom";
 
 import { getNextFixture } from "../DAL/api/api-football";
-import ContestTable from "./ContestTable";
-import LoginForm from "./LoginForm";
-import SignUpForm from "./SignUpForm";
-import UserAccount from "./UserAccount";
+import ImageCarousel from "./ImageCarousel";
+
 
 const Home = (props) => {
   const [fixtures, setFixtures] = useState([]);
@@ -26,9 +19,17 @@ const Home = (props) => {
     const games = await getNextFixture(btn.getAttribute("leagueId"), 10);
     setFixtures(games);
   };
+  useEffect(() => {
+    const getInfo = async () => {
+      const games = await getNextFixture(2833, 10);
+      setFixtures(games);
+    };
+    getInfo();
+  }, []);
 
   return (
     <>
+      <ImageCarousel />
 
       <Row className="mt-5 mb-5">
         <Col md="2">
