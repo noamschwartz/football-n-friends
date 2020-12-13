@@ -36,7 +36,7 @@ const Navigatorbar = () => {
           <Nav className="mr-auto">
             <Nav.Link href="/login">Login</Nav.Link>
           </Nav>
-          {user?.name && (
+          { (
             <Nav className="mr-auto">
               <Nav.Link href="/my-profile">My Profile</Nav.Link>
               <Nav.Link href="/my-profile">{user?.name}</Nav.Link>
